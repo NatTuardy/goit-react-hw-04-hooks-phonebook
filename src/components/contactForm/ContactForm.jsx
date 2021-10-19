@@ -5,33 +5,32 @@ import InputField from "../inputField/InputField";
 import { list } from "../../fields/fields";
 
 const ContactForm = ({ onSubmit }) => {
-  const [state, setState] = useState({
-    name: "",
-    number: "",
-  });
+  const [name, setName] = useState('')
+  const [number, setNumber] = useState('')
 
-  const handleChange = ({ target }) => {
-    const { value, name } = target;
-    setState((prevState) => ({ ...prevState, [name]: value }));
+  const handleChangeName = ({ target }) => {
+       setName(target.value)
+  };
+
+  const handleChangeNumber = ({ target }) => {
+      setNumber(target.value)
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const id = generate();
-    const { name, number } = state;
     const newContact = { id, name, number };
     onSubmit(newContact);
-    setState({
-      name: "",
-      number: "",
-    });
+    setName('')
+    setNumber('')
+
   };
-  const { name, number } = state;
+  
   return (
     <>
       <form onSubmit={handleSubmit} className="form-control mb-3">
-        <InputField {...list.name} value={name} onChange={handleChange} />
-        <InputField {...list.number} value={number} onChange={handleChange} />
+        <InputField {...list.name} value={name} onChange={handleChangeName} />
+        <InputField {...list.number} value={number} onChange={handleChangeNumber} />
         <div className="col-12">
           <button type="submit" className="btn btn-primary">
             Add contact

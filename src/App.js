@@ -5,7 +5,6 @@ import ContactList from "./components/contactList/ContactList";
 import Filter from "./components/filter/Filter";
 
 const App = () => {
-  const blockFirstRender = useRef(true)
   const [state, setState] = useState({
     contacts: [],
     filter: "",
@@ -20,10 +19,6 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
-  if(blockFirstRender){
-    blockFirstRender.current = false
-    return
-  }
   window.localStorage.setItem("contacts", JSON.stringify(state.contacts));
 }, [state.contacts])
 
