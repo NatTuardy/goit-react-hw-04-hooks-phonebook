@@ -36,20 +36,23 @@ const handleChange = ({ target }) => {
 };
 
 const   handleSubmit = (newContact) => {
-  setState((prevState) => {
-    const findDoubleContact = state.contacts.find(
-      (contact) => contact.name === newContact.name
-    );
-    if (findDoubleContact) {
-      alert(`${findDoubleContact.name} is already in contacts`);
-      return;
-    }
-    const newContactsList = [...prevState.contacts, newContact];
-    return {
-      ...prevState,
-      contacts: newContactsList,
-    };
-  });
+  const findDoubleContact = state.contacts.find(
+    (contact) => contact.name === newContact.name
+  );
+  if (findDoubleContact) {
+    alert(`${findDoubleContact.name} is already in contacts`);
+    return;
+  } else {
+    setState((prevState) => {
+  
+      const newContactsList = [...prevState.contacts, newContact];
+      return {
+        ...prevState,
+        contacts: newContactsList,
+      };
+    });
+
+  }
 };
 
 const handleDelete = (id) => {
